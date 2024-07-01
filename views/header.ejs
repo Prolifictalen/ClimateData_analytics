@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/public/styles/main.css"> 
+  <title>Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #fff;
+      padding: 10px 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .header .left img {
+      height: 60px;
+      border: none;
+      background-color: transparent;
+    }
+    .header .mid {
+      flex: 1;
+      text-align: center;
+    }
+    .header .mid h2 {
+      margin: 0;
+      color: darkblue;
+      text-transform: initial;
+    }
+    .header .right img {
+      height: 60px;
+      margin-left: 10px;
+    }
+
+    /* Navigation Bar Styles */
+    nav {
+      background-color: #333;
+      position: relative;
+      display: flex;
+      z-index: 1000;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+    }
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      margin-right: 20px;
+    }
+    .hamburger div {
+      width: 25px;
+      height: 3px;
+      background-color: white;
+      margin: 4px 0;
+    }
+    /* search bar */
+    .search-container {
+      display: flex;
+      align-items: center;
+      flex-grow: 1;
+      max-width: 500px;
+      margin: 0 auto;
+      background-color: white;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+    .search-container input {
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      flex-grow: 1;
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+    }
+    .search-container button {
+      padding: 20px;
+      background-color: #171eea;
+      border: none;
+      color: white;
+      cursor: pointer;
+      
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+    }
+    .search-container button:hover {
+      background-color: #e68900;
+    }
+    
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+    }
+    nav ul li {
+      display: inline;
+      position: relative; /* For dropdown */
+    }
+    nav ul li a {
+      color: white;
+      padding: 14px 20px;
+      text-decoration: none;
+      display: block;
+    }
+    nav ul li a:hover,
+    nav ul li a.active {
+      background-color: #ff9800;
+    }
+
+    /* Dropdown Styles */
+    nav ul li ul {
+      display: none;
+      position: absolute;
+      background-color: #333;
+      min-width: 160px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+    }
+    nav ul li:hover ul {
+      display: block;
+    }
+    nav ul li ul li {
+      display: block;
+    }
+    nav ul li ul li a {
+      padding: 12px 16px;
+    }
+    nav ul li ul li a:hover {
+      background-color: #ff9800;
+    }
+    /* the side_nav menu */
+    .side-nav {
+    height: calc(100% - 70px); /* Adjusted height */
+    width: 0;
+    position: fixed;
+    z-index: 1000;
+    top: 70px;
+    left: 0;
+    background-color: white;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 50px;
+  }
+  .side-nav a {
+      padding: 8px 8px 8px 32px;
+      text-decoration: none;
+      font-size: 25px;
+      color: #818181;
+      display: block;
+      transition: 0.3s;
+      border-bottom: 1px solid #818181;
+    }
+    .side-nav a:hover {
+      color: black;
+    }
+
+    .side-nav .closebtn {
+      position: absolute;
+      top: 0;
+      right: 25px;
+      font-size: 36px;
+      margin-left: 50px;
+    }
+     /* Style the map */
+     #map {
+            height: 100vh;
+            width: 100%;
+            position: relative;
+            z-index: 0; /* Lower than sidebar */
+        }
+
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      nav ul {
+        flex-direction: column;
+        display: none;
+      }
+      nav ul li {
+        display: block;
+      }
+      nav ul li ul {
+        position: static;
+      }
+      nav ul.show {
+        display: flex;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header {
+        padding: 5px;
+      }
+      .header .left img,
+      .header .right img {
+        height: 50px;
+      }
+      .header .mid h2 {
+        font-size: 1.2em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="left">
+      <img src="/public/styles/NICES_logo.jpg" alt="NICES">
+    </div>
+    <div class="mid">
+      <h2>National Information System for Climate and Environment Studies</h2>
+    </div>
+    <div class="right">
+    <img src="/public/styles/NICES_logo.jpg" alt="JUBLIE">
+    <img src="/css/img/nrsc.png" alt="NRSC">
+    <img src="/css/img/isroLogo (1).png" alt="ISRO">
+    <img src="/public/ashok_logo.png" alt="Emblem">
+    </div>
+  </div>
+  <nav>
+    <div class="hamburger" onclick="openNav()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+      <div class="search-container">
+        <input type="text" placeholder="Search..">
+        <button type="submit">Search</button>
+      </div>
+    <ul id="nav-menu">
+      <li><a href="/" class="active">Home</a></li>
+      <li><a href="/about">About</a></li>
+      
+      <li>
+        <a href="/newsletter">Newsletter</a>
+        <ul>
+          <li><a href="/newsletter/latest">Latest</a></li>
+          <li><a href="/newsletter/archive">Archive</a></li>
+        </ul>
+      </li>
+      <li><a href="/contact">Contact Us</a></li>
+  </nav>
+  <div id="mySidenav" class="side-nav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="#">Vector Map</a>
+    <a href="#">Satellite Map</a>
+    <a href="#">Hybrid Map</a>
+    <a href="#">Terrain Map</a>
+    <a href="#">Hydrology Map</a>
+  
+    <a href="#">Ocean</a>
+  </div>
+
+  <script>
+    function openNav() {
+      document.getElementById("mySidenav").style.width = "250px";
+    }
+
+    function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+    }
+  </script>
+</body>
+</html>
+
+
+
+
+
